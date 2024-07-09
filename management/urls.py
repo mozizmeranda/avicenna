@@ -9,4 +9,5 @@ urlpatterns = [
     path('register/', views.RegisterView.as_view({'get': 'list'})),
     path('user/', views.UserView.as_view({'get': 'list'})),
     path('login/', views.LoginView.as_view({'get': 'list'})),
+    path('register/doctor/', views.DoctorRegisterView.as_view()),
 ]

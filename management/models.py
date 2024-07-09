@@ -41,18 +41,16 @@ class User(AbstractUser, PermissionsMixin):
     is_superuser = None
     last_login = None
 
-    objects = models.Manager()
-
     class Meta:
         verbose_name = "User"
         verbose_name_plural = "Users"
 
 
-class Doctor(User):
-    bachelor_document = models.ImageField(verbose_name="Bachelory documents", upload_to="images/educations/",
-                                          name=f"Bachelor {User.number}")
-    master_document = models.ImageField(verbose_name="Master documents", null=True, upload_to="images/educations/",
-                                        name=f"Master {User.number}")
+class Doctor(models.Model):
+    user = models.ForeignKey(to=User, verbose_name="User", on_delete=models.CASCADE, related_name="user_doctor",
+                             max_length=255)
+    bachelor_document = models.ImageField(verbose_name="Bachelory documents", upload_to="images/educations/")
+    master_document = models.ImageField(verbose_name="Master documents", null=True, upload_to="images/educations/")
     experience = models.IntegerField(verbose_name="experience")
 
     description = models.TextField(verbose_name="Description", blank=True)
@@ -61,7 +59,10 @@ class Doctor(User):
 
     rating = models.DecimalField(verbose_name="Rating of doctor", max_digits=3, decimal_places=2)
 
-    is_verified = models.BooleanField(verbose_name="Is real doc?", default=None)
+    is_verified = models.BooleanField(verbose_name="Is real doc?", default=False)
+
+    def __str__(self):
+        return f"{self.user.number}"
 
     class Meta:
         verbose_name = "doctor"

@@ -1,5 +1,5 @@
 from rest_framework import viewsets, generics
-from .serializers import UserSerializer
+from .serializers import *
 from rest_framework.response import Response
 from .models import *
 from rest_framework.exceptions import AuthenticationFailed
@@ -22,7 +22,6 @@ class RegisterView(viewsets.ModelViewSet):
         serializer.save()
         number = request.data['number']
         user = User.objects.filter(number=number).first()
-
         payload = {
             "id": user.id,
             "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
@@ -72,6 +71,7 @@ class LoginView(viewsets.ModelViewSet):
         response.data = {
             "token": token
         }
+
         return response
 
 
@@ -93,3 +93,8 @@ class UserView(viewsets.ModelViewSet):
         user = User.objects.filter(id=payload['id'])
 
         return user
+
+
+class DoctorRegisterView(generics.ListCreateAPIView):
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorRegisterSerializer
