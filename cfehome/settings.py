@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'management',
     'corsheaders',
+    'chat',
+    'channels',
 ]
 
 
@@ -141,3 +143,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGINAL_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+
+
+# ASGI_APPLICATION = 'cfehome.routing.application'
+#
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             'hosts': [('127.0.0.1', 6379)],
+#         },
+#     },
+#
+# }

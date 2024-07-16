@@ -26,5 +26,5 @@ class LoginSerializer(serializers.Serializer):
 class DoctorRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor
-        exclude = ['is_verified']
-        # fields = "__all__"
+        # exclude = ['is_verified']
+        fields = "__all__"

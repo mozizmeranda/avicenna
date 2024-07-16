@@ -1,4 +1,4 @@
-from rest_framework import viewsets, generics
+from rest_framework import viewsets, generics, permissions
 from .serializers import *
 from rest_framework.response import Response
 from .models import *
@@ -98,3 +98,9 @@ class UserView(viewsets.ModelViewSet):
 class DoctorRegisterView(generics.ListCreateAPIView):
     queryset = Doctor.objects.all()
     serializer_class = DoctorRegisterSerializer
+
+
+class DoctorVerification(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorRegisterSerializer
+    permission_classes = [permissions.IsAdminUser]

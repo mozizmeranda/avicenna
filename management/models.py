@@ -50,7 +50,8 @@ class Doctor(models.Model):
     user = models.ForeignKey(to=User, verbose_name="User", on_delete=models.CASCADE, related_name="user_doctor",
                              max_length=255)
     bachelor_document = models.ImageField(verbose_name="Bachelory documents", upload_to="images/educations/")
-    master_document = models.ImageField(verbose_name="Master documents", null=True, upload_to="images/educations/")
+    master_document = models.ImageField(verbose_name="Master documents", null=True, blank=True,
+                                        upload_to="images/educations/")
     experience = models.IntegerField(verbose_name="experience")
 
     description = models.TextField(verbose_name="Description", blank=True)
